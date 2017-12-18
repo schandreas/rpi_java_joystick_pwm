@@ -30,7 +30,6 @@ public class PWMController {
 		}
 	}
 	public void cleanup() {
-		
 		for(int i = 0; i < 16; i++) {
 			try {
 				Files.write(conroot.resolve("unexport"), Integer.toString(i).getBytes());
