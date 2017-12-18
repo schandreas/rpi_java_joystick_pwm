@@ -1,0 +1,7 @@
+package ac.at.htlsteyr.ascharnr.FSPWM;
+
+import java.nio.file.*;
+
+public class PWMController {
+	protected Path pwmchip;
+}
