@@ -16,6 +16,7 @@ public class Joystick extends Thread {
 	protected Path file;
 	protected InputStream in;
 	protected boolean running;
+
 	public Joystick(String path_to_js) throws IOException {
 		file = FileSystems.getDefault().getPath(path_to_js);
 		in = Files.newInputStream(file);
@@ -39,7 +40,7 @@ public class Joystick extends Thread {
 					}
 				}
 			} catch (IOException e) {
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 		}
 	}
@@ -53,4 +54,3 @@ public class Joystick extends Thread {
 		}
 	}
 }
-

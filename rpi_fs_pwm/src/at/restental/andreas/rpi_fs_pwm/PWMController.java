@@ -6,7 +6,7 @@ public class PWMController {
 	protected Path conroot;
 	protected PWMChannel channels[];
 
-	public PWMController(String path_to_pwmchip) throws InvalidPathException{
+	public PWMController(String path_to_pwmchip) throws InvalidPathException {
 		conroot = FileSystems.getDefault().getPath(path_to_pwmchip);
 		channels = new PWMChannel[16];
 	}
@@ -14,6 +14,7 @@ public class PWMController {
 	public Path getControllerPath() {
 		return conroot;
 	}
+
 	public void InitChannel(int number) {
 		try {
 			channels[number] = new PWMChannel(this, number);
@@ -21,6 +22,7 @@ public class PWMController {
 			e.printStackTrace();
 		}
 	}
+
 	public void setPWM(int channel, int period, int duty_cycle) {
 		try {
 			channels[channel].setPeriod(period);
@@ -29,12 +31,13 @@ public class PWMController {
 			e.printStackTrace();
 		}
 	}
+
 	public void cleanup() {
-		for(int i = 0; i < 16; i++) {
+		for (int i = 0; i < 16; i++) {
 			try {
 				Files.write(conroot.resolve("unexport"), Integer.toString(i).getBytes());
 			} catch (Exception e) {
-				
+
 			}
 		}
 	}

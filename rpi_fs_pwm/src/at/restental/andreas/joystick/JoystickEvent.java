@@ -28,6 +28,7 @@ public class JoystickEvent {
 		else
 			return false;
 	}
+
 	public boolean match(int id, int type, int value) {
 		if (this.id == id && this.type == type && this.value == value)
 			return true;

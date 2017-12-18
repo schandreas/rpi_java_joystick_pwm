@@ -2,7 +2,7 @@ package at.restental.andreas.rpi_fs_pwm;
 
 import at.restental.andreas.joystick.Joystick;
 
-public class TestMain{
+public class TestMain {
 	static int x = 1;
 	static int right = 0;
 	static int left = 0;
