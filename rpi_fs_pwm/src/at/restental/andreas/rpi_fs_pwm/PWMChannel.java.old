@@ -1,8 +1,0 @@
-package ac.at.htlsteyr.ascharnr.FSPWM;
-
-import java.nio.file.*;
-
-public class PWMChannel {
-	protected Path channel;
-	protected final static String = "enable";
-}
