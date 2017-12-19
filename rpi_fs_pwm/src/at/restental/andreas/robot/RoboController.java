@@ -18,7 +18,7 @@ public class RoboController implements JoystickListener {
 			exit_detected = true;
 		if (e.type == 2 && e.value >= 0) {
 			switch (e.id) {
-			case 4:
+			case 5:
 				con.setPWM(0, 0x4000, (e.value >> 8) * (e.value >> 8));
 				con.setPWM(1, 0x4000, 0);
 				break;
@@ -32,7 +32,7 @@ public class RoboController implements JoystickListener {
 		}
 		if (e.type == 2 && e.value < 0) {
 			switch (e.id) {
-			case 4:
+			case 5:
 				con.setPWM(1, 0x4000, (e.value >> 8) * (e.value >> 8));
 				con.setPWM(0, 0x4000, 0);
 				break;
