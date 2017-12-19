@@ -1,7 +1,8 @@
-package at.restental.andreas.rpi_fs_pwm;
+package at.restental.andreas.robot;
 
 import at.restental.andreas.joystick.JoystickEvent;
 import at.restental.andreas.joystick.JoystickListener;
+import at.restental.andreas.rpi_fs_pwm.PWMController;
 
 public class RoboController implements JoystickListener {
 	protected PWMController con;

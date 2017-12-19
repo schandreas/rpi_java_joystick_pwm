@@ -1,6 +1,8 @@
-package at.restental.andreas.rpi_fs_pwm;
+package at.restental.andreas;
 
 import at.restental.andreas.joystick.Joystick;
+import at.restental.andreas.robot.RoboController;
+import at.restental.andreas.rpi_fs_pwm.PWMController;
 
 public class TestMain {
 	static int x = 1;
