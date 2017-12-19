@@ -16,13 +16,29 @@ public class RoboController implements JoystickListener {
 	public void eventReceived(JoystickEvent e) {
 		if (e.match(6, 1, 1))
 			exit_detected = true;
-		if (e.type == 2) {
+		if (e.type == 2 && e.value >= 0) {
 			switch (e.id) {
 			case 4:
 				con.setPWM(0, 0x4000, (e.value >> 8) * (e.value >> 8));
+				con.setPWM(1, 0x4000, 0);
 				break;
 			case 1:
 				con.setPWM(2, 0x4000, (e.value >> 8) * (e.value >> 8));
+				con.setPWM(3, 0x4000, 0);
+				break;
+			default:
+				break;
+			}
+		}
+		if (e.type == 2 && e.value < 0) {
+			switch (e.id) {
+			case 4:
+				con.setPWM(1, 0x4000, (e.value >> 8) * (e.value >> 8));
+				con.setPWM(0, 0x4000, 0);
+				break;
+			case 1:
+				con.setPWM(3, 0x4000, (e.value >> 8) * (e.value >> 8));
+				con.setPWM(2, 0x4000, 0);
 				break;
 			default:
 				break;

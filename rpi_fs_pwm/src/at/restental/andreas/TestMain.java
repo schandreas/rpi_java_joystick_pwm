@@ -23,7 +23,9 @@ public class TestMain {
 		}
 		rb = new RoboController(con0);
 		con0.InitChannel(0);
+		con0.InitChannel(1);
 		con0.InitChannel(2);
+		con0.InitChannel(3);
 		js0.addListener(rb);
 		while (!rb.is_exit_detected()) {
 		}
