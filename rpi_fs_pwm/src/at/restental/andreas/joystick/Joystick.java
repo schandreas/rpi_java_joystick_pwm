@@ -5,12 +5,6 @@ import java.io.InputStream;
 import java.nio.file.*;
 import java.util.Vector;
 
-/**
- * bkybb
- * 
- * @author ascharnr
- *
- */
 public class Joystick extends Thread {
 	Vector<JoystickListener> listeners;
 	protected Path file;
