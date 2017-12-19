@@ -23,7 +23,7 @@ public class PWMChannel {
 		try {
 			Files.write(this.period, (Integer.toString(period) + "000").getBytes());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("!!Error setting period. Something is very wrong");
 		}
 	}
 
@@ -31,7 +31,7 @@ public class PWMChannel {
 		try {
 			Files.write(this.duty, (Integer.toString(duty) + "000").getBytes());
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("!!Error setting duty. Something is very wrong");
 		}
 	}
 

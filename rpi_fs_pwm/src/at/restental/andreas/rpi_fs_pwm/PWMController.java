@@ -19,17 +19,13 @@ public class PWMController {
 		try {
 			channels[number] = new PWMChannel(this, number);
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println("Error opening Channel " + number);
 		}
 	}
 
 	public void setPWM(int channel, int period, int duty_cycle) {
-		try {
-			channels[channel].setPeriod(period);
-			channels[channel].setDuty(duty_cycle);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		channels[channel].setPeriod(period);
+		channels[channel].setDuty(duty_cycle);
 	}
 
 	public void cleanup() {

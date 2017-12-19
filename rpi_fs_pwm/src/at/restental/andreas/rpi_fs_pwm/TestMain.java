@@ -15,6 +15,7 @@ public class TestMain {
 			con0 = new PWMController("/sys/class/pwm/pwmchip0/");
 			js0 = new Joystick("/dev/input/js0");
 		} catch (Exception e) {
+			System.out.println("Error creating Joystick/PWM Object");
 			e.printStackTrace();
 			return;
 		}
