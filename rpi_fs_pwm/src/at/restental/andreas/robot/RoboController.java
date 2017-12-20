@@ -19,12 +19,12 @@ public class RoboController implements JoystickListener {
 		if (e.type == 2 && e.value >= 0) {
 			switch (e.id) {
 			case 4:
-				con.setPWM(0, 0x4000, (e.value >> 8) * (e.value >> 8));
-				con.setPWM(1, 0x4000, 0);
+				con.setPWM(0, 0x7fff, e.value);
+				con.setPWM(1, 0x7fff, 0);
 				break;
 			case 1:
-				con.setPWM(2, 0x4000, (e.value >> 8) * (e.value >> 8));
-				con.setPWM(3, 0x4000, 0);
+				con.setPWM(2, 0x7fff, e.value);
+				con.setPWM(3, 0x7fff, 0);
 				break;
 			default:
 				break;
@@ -33,12 +33,12 @@ public class RoboController implements JoystickListener {
 		if (e.type == 2 && e.value < 0) {
 			switch (e.id) {
 			case 4:
-				con.setPWM(1, 0x4000, (e.value >> 8) * (e.value >> 8));
-				con.setPWM(0, 0x4000, 0);
+				con.setPWM(1, 0x7fff, -1 * e.value);
+				con.setPWM(0, 0x7fff, 0);
 				break;
 			case 1:
-				con.setPWM(3, 0x4000, (e.value >> 8) * (e.value >> 8));
-				con.setPWM(2, 0x4000, 0);
+				con.setPWM(3, 0x7fff, -1 * e.value);
+				con.setPWM(2, 0x7fff, 0);
 				break;
 			default:
 				break;
