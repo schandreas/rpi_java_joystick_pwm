@@ -14,8 +14,9 @@ public class TestMain {
 		try {
 			motors = new Integer(args[0]);
 		} catch (Exception e) {
+
 		}
-		
+
 		try {
 			con0 = new PWMController("/sys/class/pwm/pwmchip0/");
 			js0 = new Joystick("/dev/input/js0");
@@ -25,7 +26,6 @@ public class TestMain {
 			return;
 		}
 		if (motors > 0) {
-			System.out.println("RECEIVED");
 			rb = new RoboController(con0, motors, js0.getControllerType());
 			for (int i = 0; i < 2 * motors; i++)
 				con0.InitChannel(i);

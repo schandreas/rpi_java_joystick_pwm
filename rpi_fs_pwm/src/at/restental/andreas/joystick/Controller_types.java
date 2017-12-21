@@ -1,7 +1,7 @@
 package at.restental.andreas.joystick;
 
 public enum Controller_types {
-	UNKNOWN(1, 4), DS4(1, 5), XBOX360(1, 4);
+	UNKNOWN(4, 1), DS4(5, 1), XBOX360(4, 1);
 
 	private final int axis_left;
 	private final int axis_right;
