@@ -4,12 +4,14 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class LEDControll {
+import at.restental.andreas.joystick.JoystickLED;
+
+public class DS4ColorController implements JoystickLED {
 	protected Path red;
 	protected Path green;
 	protected Path blue;
 
-	public LEDControll() {
+	public DS4ColorController() throws Exception {
 		File temp = new File("/sys/class/leds");
 		String[] list = temp.list();
 		for (int i = 0; i < list.length; i++) {
@@ -24,8 +26,10 @@ public class LEDControll {
 				e.printStackTrace();
 			}
 		}
+		if(red == null || green == null || blue == null)throw new Exception();
 	}
 	
+	@Override
 	public void setColor(int red, int green, int blue) {
 		try {
 			Files.write(this.red, Integer.toString(red).getBytes());
@@ -34,6 +38,11 @@ public class LEDControll {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void setPattern(int pattern) {
+		
 	}
 	
 }
