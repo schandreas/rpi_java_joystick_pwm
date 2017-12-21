@@ -11,7 +11,10 @@ public class TestMain {
 		Joystick js0;
 		PWMController con0;
 		RoboController rb;
+		int motors = 0;
 		LEDControll leds = new LEDControll();
+		
+		
 		try {
 			con0 = new PWMController("/sys/class/pwm/pwmchip0/");
 			js0 = new Joystick("/dev/input/js0");
@@ -20,18 +23,15 @@ public class TestMain {
 			e.printStackTrace();
 			return;
 		}
-		if (args.length > 0)
-			rb = new RoboController(con0, new Integer(args[0]));
-		else
+		if (motors > 0) {
+			rb = new RoboController(con0, motors);
+			for (int i = 0; i < 2 * motors; i++)
+				con0.InitChannel(i);
+		} else {
 			rb = new RoboController(con0, 2);
-		con0.InitChannel(0);
-		con0.InitChannel(1);
-		con0.InitChannel(2);
-		con0.InitChannel(3);
-		con0.InitChannel(4);
-		con0.InitChannel(5);
-		con0.InitChannel(6);
-		con0.InitChannel(7);
+			for (int i = 0; i < 4; i++)
+				con0.InitChannel(i);
+		}
 		js0.addListener(rb);
 		leds.setColor(0, 128, 64);
 		while (!rb.is_exit_detected()) {
