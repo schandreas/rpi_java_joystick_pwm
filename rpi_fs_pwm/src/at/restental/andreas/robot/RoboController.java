@@ -49,6 +49,7 @@ public class RoboController implements JoystickListener {
 			for(int i = 0; i < mode; i ++) {
 				if(i % 2 == j)con.setPWM(right[i], 0x7fff, e.value);
 				else con.setPWM(right[i], 0x7fff, 0);
+
 			}
 		}
 	}
