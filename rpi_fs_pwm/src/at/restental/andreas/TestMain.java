@@ -20,16 +20,24 @@ public class TestMain {
 			e.printStackTrace();
 			return;
 		}
-		rb = new RoboController(con0);
+		if (args.length > 0)
+			rb = new RoboController(con0, new Integer(args[0]));
+		else
+			rb = new RoboController(con0, 2);
 		con0.InitChannel(0);
 		con0.InitChannel(1);
 		con0.InitChannel(2);
 		con0.InitChannel(3);
+		con0.InitChannel(4);
+		con0.InitChannel(5);
+		con0.InitChannel(6);
+		con0.InitChannel(7);
 		js0.addListener(rb);
-		leds.setColor(0, 128, 0);
+		leds.setColor(0, 128, 64);
 		while (!rb.is_exit_detected()) {
+
 		}
-		leds.setColor(1, 1, 0);
+		leds.setColor(0, 0, 1);
 		js0.cleanup();
 		con0.cleanup();
 	}
