@@ -14,6 +14,13 @@ public class JoystickEvent {
 	public byte type;
 	public byte id;
 
+	/**
+	 * Converts an event in the format normally read out of the js file of a
+	 * joystick to a series of readable values
+	 * 
+	 * @param raw
+	 *            the event to be converted. Should be 8 bytes big
+	 */
 	public JoystickEvent(byte[] raw) {
 		this.timestamp = (long) (((raw[TIME0] & 0xFF)) | ((raw[TIME1] & 0xFF) << 8) | ((raw[TIME2] & 0xFF) << 16)
 				| ((raw[TIME3] & 0xFF) << 24));
@@ -22,6 +29,15 @@ public class JoystickEvent {
 		this.type = raw[TYPE];
 	}
 
+	/**
+	 * Checks if this event matches the specifies parameters
+	 * 
+	 * @param id
+	 *            id to be checked against
+	 * @param type
+	 *            type to be checked against
+	 * @return true if the events macth. false if not
+	 */
 	public boolean match(int id, int type) {
 		if (this.id == id && this.type == type)
 			return true;
@@ -29,6 +45,17 @@ public class JoystickEvent {
 			return false;
 	}
 
+	/**
+	 * Checks if this event matches the specifies parameters
+	 * 
+	 * @param id
+	 *            id to be checked against
+	 * @param type
+	 *            type to be checked against
+	 * @param value
+	 *            value to be checked against
+	 * @return true if the events macth. false if not
+	 */
 	public boolean match(int id, int type, int value) {
 		if (this.id == id && this.type == type && this.value == value)
 			return true;

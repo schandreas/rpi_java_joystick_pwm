@@ -11,6 +11,13 @@ public class DS4ColorController implements JoystickLED {
 	protected Path green;
 	protected Path blue;
 
+	/**
+	 * Opens the three color channel files
+	 * 
+	 * @throws Exception
+	 *             if one or more of the channel files cannot be opened. Works as a
+	 *             detect if the controller is a ds4 controller
+	 */
 	public DS4ColorController() throws Exception {
 		File temp = new File("/sys/class/leds");
 		String[] list = temp.list();
@@ -26,9 +33,13 @@ public class DS4ColorController implements JoystickLED {
 				e.printStackTrace();
 			}
 		}
-		if(red == null || green == null || blue == null)throw new Exception();
+		if (red == null || green == null || blue == null)
+			throw new Exception();
 	}
-	
+
+	/**
+	 * Writes the red green and blue values to the corresponding channel files
+	 */
 	@Override
 	public void setColor(int red, int green, int blue) {
 		try {
@@ -40,9 +51,12 @@ public class DS4ColorController implements JoystickLED {
 		}
 	}
 
+	/**
+	 * NOT IMPLEMENTED. DOES NOTHING
+	 */
 	@Override
 	public void setPattern(int pattern) {
-		
+
 	}
-	
+
 }

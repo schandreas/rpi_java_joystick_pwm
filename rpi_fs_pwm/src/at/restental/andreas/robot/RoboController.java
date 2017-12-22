@@ -13,6 +13,17 @@ public class RoboController implements JoystickListener {
 	protected int mode;
 	protected Controller_types con_type;
 
+	/**
+	 * Constructor for RoboController
+	 * 
+	 * @param con
+	 *            PWMController Object that will be used
+	 * @param mode
+	 *            specifies if the RoboController is in 2 or 4 motor mode
+	 * @param con_type
+	 *            the type of joystick that is going to be used. Specifies the
+	 *            bindings for the axies
+	 */
 	public RoboController(PWMController con, int mode, Controller_types con_type) {
 		this.con = con;
 		this.mode = mode;
@@ -25,35 +36,53 @@ public class RoboController implements JoystickListener {
 		this.con_type = con_type;
 	}
 
+	/**
+	 * Implementation of JoystickListener. Takes the event e and sets the
+	 * corresponding pwm channels accordingly
+	 * 
+	 * @param e
+	 *            JoystickEvent sent out by the Joystick.run() loop
+	 * @see Joystick.run();
+	 */
 	@Override
 	public void eventReceived(JoystickEvent e) {
 		if (e.match(6, 1, 1))
 			exit_detected = true;
 		if (e.id == con_type.axis_left() && e.type == 2) {
 			int j = 0;
-			if(e.value < 0) {
+			if (e.value < 0) {
 				j = 1;
 				e.value *= -1;
 			}
-			for(int i = 0; i < mode; i ++) {
-				if(i % 2 == j)con.setPWM(left[i], 0x7fff, e.value);
-				else con.setPWM(left[i], 0x7fff, 0);
+			for (int i = 0; i < mode; i++) {
+				if (i % 2 == j)
+					con.setPWM(left[i], 0x7fff, e.value);
+				else
+					con.setPWM(left[i], 0x7fff, 0);
 			}
 		}
 		if (e.id == con_type.axis_right() && e.type == 2) {
 			int j = 0;
-			if(e.value < 0) {
+			if (e.value < 0) {
 				j = 1;
 				e.value *= -1;
 			}
-			for(int i = 0; i < mode; i ++) {
-				if(i % 2 == j)con.setPWM(right[i], 0x7fff, e.value);
-				else con.setPWM(right[i], 0x7fff, 0);
+			for (int i = 0; i < mode; i++) {
+				if (i % 2 == j)
+					con.setPWM(right[i], 0x7fff, e.value);
+				else
+					con.setPWM(right[i], 0x7fff, 0);
 
 			}
 		}
 	}
 
+	/**
+	 * Checks if the exit button was pressed
+	 * 
+	 * @return returns true if the exit button was pressed on the controller.
+	 *         returns false otherwise
+	 */
 	public boolean is_exit_detected() {
 		return exit_detected;
 	}
