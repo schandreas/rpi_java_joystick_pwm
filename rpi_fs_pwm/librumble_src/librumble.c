@@ -13,10 +13,6 @@
  * 
  */
 
-void setUpVibrating();
-void startVibrating();
-void stopVibrating();
-
 int fd = 0;
 struct ff_effect effect;
 struct input_event play, gain;
