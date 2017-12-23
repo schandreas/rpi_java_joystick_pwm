@@ -5,6 +5,14 @@ public class RumbleControl {
 	static {
 		System.loadLibrary("rumble"); 
 	}
-	public native void rumble();
 	
+	public RumbleControl() {
+		this.setuprumble();
+	}
+	
+	private native void setuprumble();
+	
+	public native void startrumble();
+	
+	public native void stoprumble();
 }

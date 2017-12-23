@@ -31,7 +31,7 @@ public class DistanceSensor {
 	 */
 	public int getDistance() {
 		try {
-			return new Integer(new String(Files.readAllBytes(measure)));
+			return new Integer(new String(Files.readAllBytes(measure)).trim());
 		} catch (IOException e) {
 			e.printStackTrace();
 			return 0;
