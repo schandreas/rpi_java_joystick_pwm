@@ -1,17 +1,23 @@
 package at.restental.andreas.robot;
 
+import at.restental.andreas.distance_sensor.DistanceSensor;
+import at.restental.andreas.distance_sensor.DistanceSensorEvent;
+import at.restental.andreas.distance_sensor.DistanceSensorListener;
 import at.restental.andreas.joystick.Controller_types;
 import at.restental.andreas.joystick.JoystickEvent;
 import at.restental.andreas.joystick.JoystickListener;
+import at.restental.andreas.joystick.rumble.RumbleControl;
 import at.restental.andreas.rpi_fs_pwm.PWMController;
 
-public class RoboController implements JoystickListener {
+public class RoboController implements JoystickListener, DistanceSensorListener {
 	protected PWMController con;
+	protected RumbleControl rm;
 	protected boolean exit_detected = false;
 	protected int[] left;
 	protected int[] right;
 	protected int mode;
 	protected Controller_types con_type;
+	protected DistanceSensor prev;
 
 	/**
 	 * Constructor for RoboController
@@ -34,6 +40,7 @@ public class RoboController implements JoystickListener {
 			right[i] = mode + i;
 		}
 		this.con_type = con_type;
+		rm = new RumbleControl();
 	}
 
 	/**
@@ -85,5 +92,16 @@ public class RoboController implements JoystickListener {
 	 */
 	public boolean is_exit_detected() {
 		return exit_detected;
+	}
+
+	@Override
+	public void eventReceived(DistanceSensorEvent e) {
+		if(e.value() < 1000) {
+			rm.startrumble();
+			prev = e.src();
+		}else if(e.src() == prev){
+			rm.stoprumble();
+			prev = null;
+		}
 	}
 }

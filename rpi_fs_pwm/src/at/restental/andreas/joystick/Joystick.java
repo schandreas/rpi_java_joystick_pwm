@@ -8,7 +8,7 @@ import at.restental.andreas.joystick.Dualshock4.DS4ColorController;
 import at.restental.andreas.joystick.XBOX360.Xbox360PatternController;
 
 public class Joystick extends Thread {
-	Vector<JoystickListener> listeners;
+	protected Vector<JoystickListener> listeners;
 	protected Path file;
 	protected InputStream in;
 	protected boolean running;
