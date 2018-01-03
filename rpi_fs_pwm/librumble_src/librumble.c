@@ -17,7 +17,9 @@ int fd = 0;
 struct ff_effect effect;
 struct input_event play, gain;
 
-
+/**
+ *
+ */
 JNIEXPORT void JNICALL Java_at_restental_andreas_joystick_rumble_RumbleControl_setuprumble
   (JNIEnv *env, jobject thisobject){
     if (fd == 0) {
@@ -25,19 +27,19 @@ JNIEXPORT void JNICALL Java_at_restental_andreas_joystick_rumble_RumbleControl_s
         effect.type = FF_PERIODIC;
         effect.id = -1;
         effect.u.periodic.waveform = FF_SINE;
-        effect.u.periodic.period = 100; /* 0.1 second */
-        effect.u.periodic.magnitude = 0x7fff; /* 0.5 * Maximum magnitude */
+        effect.u.periodic.period = 10;
+        effect.u.periodic.magnitude = 0x7fff;
         effect.u.periodic.offset = 0;
         effect.u.periodic.phase = 0;
-        effect.direction = 0x4000; /* Along X axis */
+        effect.direction = 0x4000;
         effect.u.periodic.envelope.attack_length = 1000;
         effect.u.periodic.envelope.attack_level = 0x7fff;
         effect.u.periodic.envelope.fade_length = 1000;
         effect.u.periodic.envelope.fade_level = 0x7fff;
         effect.trigger.button = 0;
         effect.trigger.interval = 0;
-        effect.replay.length = 20000; /* 20 seconds */
-        effect.replay.delay = 1000;
+        effect.replay.length = 20000;
+        effect.replay.delay = 0;
 
         fd = open("/dev/input/event0", O_RDWR);
 
