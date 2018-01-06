@@ -96,12 +96,6 @@ public class RoboController implements JoystickListener, DistanceSensorListener 
 
 	@Override
 	public void eventReceived(DistanceSensorEvent e) {
-		if(e.value() < 1000) {
-			rm.startrumble();
-			prev = e.src();
-		}else if(e.src() == prev){
-			rm.stoprumble();
-			prev = null;
-		}
+		
 	}
 }
