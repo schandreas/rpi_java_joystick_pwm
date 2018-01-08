@@ -1,5 +1,7 @@
 package at.restental.andreas;
 
+import java.io.IOException;
+
 import at.restental.andreas.RPI_Server.RPI_Server;
 import at.restental.andreas.distance_sensor.DistanceSensor;
 import at.restental.andreas.robot.RoboController;
@@ -11,6 +13,8 @@ public class TestMain {
 		PWMController con0;
 		RoboController rb;
 		RPI_Server server;
+		String msg = null;
+		String[] raw;
 		DistanceSensor ds1 = new DistanceSensor(16, 19, 3000);
 		DistanceSensor ds2 = new DistanceSensor(20, 21, 3000);
 		int motors = 0;
@@ -39,12 +43,25 @@ public class TestMain {
 		ds1.attachListener(rb);
 		ds2.attachListener(rb);
 		while (!rb.is_exit_detected()) {
-			
+			try {
+				msg = server.in.readLine();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			raw = msg.split("-");
+			rb.drive(Integer.parseInt(raw[0]), Integer.parseInt(raw[1]));
 		}
 		ds1.cleanup();
 		ds2.cleanup();
 		con0.cleanup();
 		server.cleanup();
+		try {
+			server.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
