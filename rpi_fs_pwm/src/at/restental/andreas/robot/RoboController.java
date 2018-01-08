@@ -7,6 +7,7 @@ import at.restental.andreas.rpi_fs_pwm.PWMController;
 
 public class RoboController implements DistanceSensorListener {
 	protected PWMController con;
+	private static final int period = 10000;
 	protected boolean exit_detected = false;
 	protected int[] left;
 	protected int[] right;
@@ -38,26 +39,54 @@ public class RoboController implements DistanceSensorListener {
 	/*
 	 * 
 	 */
-	public void drive(int a, int b) {
-		System.out.println("Received " + a + " " + b);
-//		int j = 0;
-//		if(b < 3 &&)
-//		if (a < 3 && a > 1) {
-//			for (int i = 0; i < mode; i++) {
-//				if (i % 2 == j)
-//					con.setPWM(left[i], 7000, 0);
-//				else
-//					con.setPWM(left[i], 7000, 0);
-//			}
-//		}
-//		
-//		for (int i = 0; i < mode; i++) {
-//			if (i % 2 == j)
-//				con.setPWM(left[i], 7000, 0);
-//			else
-//				con.setPWM(left[i], 7000, 0);
-//		}
+	public void drive(int direction_left, int direction_right) {
+		
+		direction_left = (direction_left - 90) % 361;
+		direction_right = (direction_right - 90) % 361;
+		
+		//System.out.println("Received " + direction_left + " " + direction_right);
+		
+		if (direction_left > 15) {
+			for (int i = 0; i < mode; i++) {
+				if (i % 2 == 1)
+					con.setPWM(left[i], period, (direction_left % 100) * 100);
+				else
+					con.setPWM(left[i], period, 0);
+			}
 
+		} else if (direction_left < -15) {
+			for (int i = 0; i < mode; i++) {
+				if (i % 2 == 0)
+					con.setPWM(left[i], period, -(direction_left % 100) * 100);
+				else
+					con.setPWM(left[i], period, 0);
+			}
+
+		} else {
+			for (int i = 0; i < mode; i++)
+				con.setPWM(left[i], period, 0);
+		}
+
+		if (direction_right > 15) {
+			for (int i = 0; i < mode; i++) {
+				if (i % 2 == 1)
+					con.setPWM(right[i], period, (direction_right % 100) * 100);
+				else
+					con.setPWM(right[i], period, 0);
+			}
+
+		} else if (direction_right < -15) {
+			for (int i = 0; i < mode; i++) {
+				if (i % 2 == 0)
+					con.setPWM(right[i], period, -(direction_right % 100) * 100);
+				else
+					con.setPWM(right[i], period, 0);
+			}
+
+		} else {
+			for (int i = 0; i < mode; i++)
+				con.setPWM(right[i], period, 0);
+		}
 	}
 
 	/**

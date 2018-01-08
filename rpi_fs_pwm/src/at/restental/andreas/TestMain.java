@@ -13,7 +13,7 @@ public class TestMain {
 		PWMController con0;
 		RoboController rb;
 		RPI_Server server;
-		String msg = null;
+		String msg = "a";
 		String[] raw;
 		DistanceSensor ds1 = new DistanceSensor(16, 19, 3000);
 		DistanceSensor ds2 = new DistanceSensor(20, 21, 3000);
@@ -42,15 +42,18 @@ public class TestMain {
 		}
 		ds1.attachListener(rb);
 		ds2.attachListener(rb);
-		while (!rb.is_exit_detected()) {
+		while (msg.compareTo("end") != 0) {
 			try {
 				msg = server.in.readLine();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				
 			}
-			raw = msg.split("-");
-			rb.drive(Integer.parseInt(raw[0]), Integer.parseInt(raw[1]));
+			try {
+				raw = msg.split(" ");
+				rb.drive(Integer.parseInt(raw[1]), Integer.parseInt(raw[0]));
+			} catch (Exception e) {
+
+			}
 		}
 		ds1.cleanup();
 		ds2.cleanup();
