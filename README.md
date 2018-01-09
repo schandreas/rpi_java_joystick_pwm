@@ -1,4 +1,4 @@
-# rpi_java_joystick_pwm
+# rpi_robo
 Program to read input from a Controller and steer a little robot
 
 
