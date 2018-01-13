@@ -32,11 +32,11 @@ public class TestMain {
 			return;
 		}
 		if (motors > 0) {
-			rb = new RoboController(con0, motors);
+			rb = new RoboController(con0, motors, server.out);
 			for (int i = 0; i < 2 * motors; i++)
 				con0.InitChannel(i);
 		} else {
-			rb = new RoboController(con0, 2);
+			rb = new RoboController(con0, 2, server.out);
 			for (int i = 0; i < 4; i++)
 				con0.InitChannel(i);
 		}
@@ -62,7 +62,6 @@ public class TestMain {
 		try {
 			server.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

@@ -1,5 +1,7 @@
 package at.restental.andreas.robot;
 
+import java.io.PrintWriter;
+
 import at.restental.andreas.distance_sensor.DistanceSensor;
 import at.restental.andreas.distance_sensor.DistanceSensorEvent;
 import at.restental.andreas.distance_sensor.DistanceSensorListener;
@@ -7,6 +9,7 @@ import at.restental.andreas.rpi_fs_pwm.PWMController;
 
 public class RoboController implements DistanceSensorListener {
 	protected PWMController con;
+	protected PrintWriter out;
 	private static final int period = 10000;
 	protected boolean exit_detected = false;
 	protected int[] left;
@@ -25,9 +28,10 @@ public class RoboController implements DistanceSensorListener {
 	 *            the type of joystick that is going to be used. Specifies the
 	 *            bindings for the axies
 	 */
-	public RoboController(PWMController con, int mode) {
+	public RoboController(PWMController con, int mode, PrintWriter out) {
 		this.con = con;
 		this.mode = mode;
+		this.out = out;
 		left = new int[mode];
 		right = new int[mode];
 		for (int i = 0; i < mode; i++) {
@@ -47,6 +51,7 @@ public class RoboController implements DistanceSensorListener {
 		//System.out.println("Received " + direction_left + " " + direction_right);
 		
 		if (direction_left > 15) {
+			out.println("left_fwd");
 			for (int i = 0; i < mode; i++) {
 				if (i % 2 == 1)
 					con.setPWM(left[i], period, (direction_left % 100) * 100);
@@ -55,6 +60,7 @@ public class RoboController implements DistanceSensorListener {
 			}
 
 		} else if (direction_left < -15) {
+			out.println("left_rev");
 			for (int i = 0; i < mode; i++) {
 				if (i % 2 == 0)
 					con.setPWM(left[i], period, -(direction_left % 100) * 100);
@@ -63,11 +69,13 @@ public class RoboController implements DistanceSensorListener {
 			}
 
 		} else {
+			out.println("left_off");
 			for (int i = 0; i < mode; i++)
 				con.setPWM(left[i], period, 0);
 		}
 
 		if (direction_right > 15) {
+			out.println("right_fwd");
 			for (int i = 0; i < mode; i++) {
 				if (i % 2 == 1)
 					con.setPWM(right[i], period, (direction_right % 100) * 100);
@@ -76,6 +84,7 @@ public class RoboController implements DistanceSensorListener {
 			}
 
 		} else if (direction_right < -15) {
+			out.println("right_rev");
 			for (int i = 0; i < mode; i++) {
 				if (i % 2 == 0)
 					con.setPWM(right[i], period, -(direction_right % 100) * 100);
@@ -84,6 +93,7 @@ public class RoboController implements DistanceSensorListener {
 			}
 
 		} else {
+			out.println("right_off");
 			for (int i = 0; i < mode; i++)
 				con.setPWM(right[i], period, 0);
 		}
