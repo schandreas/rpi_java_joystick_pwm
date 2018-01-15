@@ -97,6 +97,7 @@ public class RoboController implements DistanceSensorListener {
 			for (int i = 0; i < mode; i++)
 				con.setPWM(right[i], period, 0);
 		}
+		out.flush();
 	}
 
 	/**
