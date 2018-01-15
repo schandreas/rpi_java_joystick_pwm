@@ -42,7 +42,7 @@ public class TestMain {
 		}
 		ds1.attachListener(rb);
 		ds2.attachListener(rb);
-		while (msg.compareTo("end") != 0) {
+		while (!msg.equals("end")) {
 			try {
 				msg = server.in.readLine();
 			} catch (IOException e) {
