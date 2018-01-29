@@ -35,7 +35,9 @@ public class DistanceSensor extends Thread {
 	}
 
 	/**
-	 * gets the distance out of the measure file
+	 * Gets the distance out of the measure file. Exits if cleanup() is called
+	 * 
+	 * @see cleanup()
 	 */
 	public void run() {
 		while (!exit) {
@@ -48,7 +50,12 @@ public class DistanceSensor extends Thread {
 			}
 		}
 	}
-	
+
+	/**
+	 * Sets the exit variable in this class to true. Closes this thread
+	 * 
+	 * @see run()
+	 */
 	public void cleanup() {
 		exit = true;
 	}
