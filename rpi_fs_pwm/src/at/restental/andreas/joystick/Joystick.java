@@ -22,6 +22,7 @@ public class Joystick extends Thread {
 	 * @param path_to_js
 	 *            The path to the jsX file. Most likely /dev/input/js0
 	 * @throws IOException
+	 *             if the file cannot be opened
 	 */
 	public Joystick(String path_to_js) throws IOException {
 		file = FileSystems.getDefault().getPath(path_to_js);
